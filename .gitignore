@@ -4,6 +4,7 @@
 *.idea
 target/
 logs/
+transaction-logs/
 
 # Log file
 *.log
