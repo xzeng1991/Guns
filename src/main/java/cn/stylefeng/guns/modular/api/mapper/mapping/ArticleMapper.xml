@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.api.mapper.ArticleMapper">
+ 	<!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.api.entity.ArticleInfo">
+        <id column="id" property="id"/>
+        <result column="avatar" property="avatar"/>
+        <result column="author" property="author"/>
+        <result column="title" property="title"/>
+        <result column="img" property="img"/>
+        <result column="brife" property="brife"/>
+        <result column="content" property="content"/>
+        <result column="collect_num" property="collectNum"/>
+        <result column="read_num" property="readNum"/>
+        <result column="comment_num" property="commentNum"/>
+        <result column="up_num" property="upNum"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,
+        avatar,
+        author,
+        title,
+        img,
+        brife,
+        content,
+        collect_num collectNum,
+        read_num    readNum,
+        comment_num commentNum,
+        up_num    upNum,
+        create_time createTime
+    </sql>
+
+    <select id="selectArticles" resultType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from article
+        <if test="condition != null">
+            where title like CONCAT('%',#{condition},'%')
+        </if>
+        order by create_time desc
+    </select>
+</mapper>
