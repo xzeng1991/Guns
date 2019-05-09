@@ -43,14 +43,15 @@ layui.use(['layer', 'form', 'table', 'admin', 'ax'], function () {
     };
 
     /**
-     * 弹出添加角色
+     * 弹出添加文章页面
      */
     Article.openAddRole = function () {
         admin.putTempData('formOk', false);
         top.layui.admin.open({
             type: 2,
-            title: '添加角色',
-            content: Feng.ctxPath + '/role/role_add',
+            area: ['890px', '660px'],
+            title: '添加文章',
+            content: Feng.ctxPath + '/article/article_add',
             end: function () {
                 admin.getTempData('formOk') && table.reload(Article.tableId);
             }

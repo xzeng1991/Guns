@@ -19,7 +19,7 @@
     <title>${title!"管理系统"}</title>
     <link rel="stylesheet" href="${ctxPath}/assets/common/layui/css/layui.css"/>
     <link rel="stylesheet" href="${ctxPath}/assets/common/module/admin.css" media="all"/>
-
+    <link href="${ctxPath}/assets/Content/Layui-KnifeZ/css/layui.css" rel="stylesheet" />
     <!--其他插件css-->
     @if(isNotEmpty(plugins)){
         @if(array.contain(plugins,"ztree")){
@@ -60,6 +60,10 @@ ${layoutContent}
 </script>
 
 @/* js和业务用的js数组 */
+
+
+<script src="${ctxPath}/assets/Content/Layui-KnifeZ/layui.js"></script>
+<script src="${ctxPath}/assets/Content/ace/ace.js"></script>
 <script type="text/javascript" src="${ctxPath}/assets/common/layui/layui.js"></script>
 <script type="text/javascript" src="${ctxPath}/assets/common/js/common.js"></script>
 

@@ -1,8 +1,39 @@
-<#include "/pages/head_lib.html">
-	<script type="text/javascript" charset="utf-8" src="${webroot}/static/plugins/ueditor/ueditor.config.js"></script>
-	<script type="text/javascript" charset="utf-8" src="${webroot}/static/plugins/ueditor/ueditor.all.min.js"> </script>
-	<script type="text/javascript" charset="utf-8" src="${webroot}/static/plugins/ueditor/lang/zh-cn/zh-cn.js"></script>
-	<body style="" class="  pace-done">
+
+<html>
+<head>
+<meta content="text/html;charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Cache-Control" content="no cache" />
+<meta http-equiv="Expires" content="0" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="format-detection" content="telephone=no" />
+
+
+<link href="${ctxPath}/assets/common/plugins/pace/pace-theme-flash.css" rel="stylesheet">
+<link rel="stylesheet" href="${ctxPath}/assets/common/layui/css/layui.css">
+<link href="${ctxPath}/assets/common/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="${ctxPath}/assets/common/css/admin.css" media="all" />
+<script type="text/javascript" src="${ctxPath}/assets/common/plugins/pace/pace.min.js"></script>
+<script type="text/javascript" src="${ctxPath}/assets/common/plugins/jquery/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="${ctxPath}/assets/common/layui/lay/modules/layer.js"></script>
+<script type="text/javascript" src="${ctxPath}/assets/common/layui/layui.js"></script>
+<script type="text/javascript" charset="utf-8" src="${ctxPath}/assets/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="${ctxPath}/assets/ueditor/ueditor.all.min.js"></script>
+ <script type="text/javascript" charset="utf-8" src="${ctxPath}/assets/lang/zh-cn/zh-cn.js"></script>
+
+<script src="${ctxPath}/assets/common/layui/lay/modules/laydate.js"></script>
+<script src="${ctxPath}/assets/common/layui/css/modules/laydate/default/laydate.css"></script>
+
+<script type="text/javascript">
+layui.laydate.render({
+  elem: '#createTime' //指定元素
+});
+</script>
+</head>
+<body style="" class="  pace-done">
 	<div class="pace  pace-inactive">
 		<div class="pace-progress"
 			style="transform: translate3d(100%, 0px, 0px);"
@@ -18,7 +49,7 @@
 				type="hidden" name="site_id" value="1"> <input type="hidden"
 				name="column_id" value="3">
 			<div class="layui-form-item">
-				<label class="layui-form-label">标题</label>
+				<label class="layui-form-label">文章标题</label>
 				<div class=" layui-input-block ">
 					<input type="text" name="title_name" required="" lay-vertype="msg"
 						lay-verify="required" value="" placeholder="" autocomplete="off"
@@ -26,50 +57,22 @@
 				</div>
 			</div>
 			<div class="layui-form-item">
-				<label class="layui-form-label">缩略图</label>
-				<div class="layui-input-inline ">
-					<div class="layui-input-inline">
-						<input required="" lay-vertype="msg" type="text" id="filePath"
-							name="thumbnail" autocomplete="off" disabled="disabled"
-							class="layui-input">
-					</div>
-
-				</div>
-				<div class="layui-input-inline">
-					<button type="button" class="layui-btn" function="upload"
-						fileelem="#filePath" fileaccept="file" fileexts="" filesize="1024"
-						inputs="type:test">上传</button>
-				</div>
-			</div>
-			<div class="layui-form-item">
-				<label class="layui-form-label">来源</label>
+				<label class="layui-form-label">文章简介</label>
 				<div class=" layui-input-block ">
 					<input type="text" name="source" required="" lay-vertype="msg"
 						value="本站" placeholder="本站" autocomplete="off" class="layui-input">
 				</div>
 			</div>
 			<div class="layui-form-item">
-				<label class="layui-form-label">关键字</label>
+				<label class="layui-form-label">作者</label>
 				<div class=" layui-input-block ">
 					<input type="text" name="keyword" required="" lay-vertype="msg"
 						lay-verify="required" value="" placeholder="" autocomplete="off"
 						class="layui-input">
 				</div>
 			</div>
-			
-			<div class="layui-form-item">
-				<label class="layui-form-label">内容</label>
-				<div class=" layui-input-block ">
-			                <script id="edit" name="content" type="text/plain" style="width:100%;height:200px;">
-                            </script>
-                            <script type="text/javascript">
-                            var ue = UE.getEditor('content',{autoHeightEnabled: true});
-							</script>
-				</div>
-			</div>
-							
-			
-			<!-- <div class="layui-form-item" style="">
+
+			 <div class="layui-form-item" style="">
 				<label class="layui-form-label">内容</label>
 				<div class=" layui-input-block " style="">
 					<div style="width: 100%;" id="content" class="edui-default">
@@ -1586,7 +1589,7 @@
 							</div>
 							<div id="edui1_iframeholder"
 								class="edui-editor-iframeholder edui-default"
-								style="width: 100%; height: 200px; z-index: 999; overflow: hidden;">
+								style="width: 100%; height: 500px; z-index: 999; overflow: hidden;">
 								<iframe id="ueditor_0"
 									src="javascript:void(function(){document.open();document.write(&quot;<!DOCTYPE html><html xmlns='http://www.w3.org/1999/xhtml' class='view' ><head><style type='text/css'>.view{padding:0;word-wrap:break-word;cursor:text;height:90%;}
 body{margin:8px;font-family:sans-serif;font-size:16px;}p{margin:5px 0;}</style><link rel='stylesheet' type='text/css' href='http://localhost:8080/ofcms-admin/static/plugins/ueditor/themes/iframe.css'/></head><body class='view' ></body><script type='text/javascript'  id='_initialScript'>setTimeout(function(){editor = window.parent.UE.instants['ueditorInstant0'];editor._setup(document);},0);var _tmpScript = document.getElementById('_initialScript');_tmpScript.parentNode.removeChild(_tmpScript);</script></html>&quot;);document.close();}())"
@@ -1618,7 +1621,6 @@ body{margin:8px;font-family:sans-serif;font-size:16px;}p{margin:5px 0;}</style><
 							<div id="edui1_scalelayer" class="edui-default"></div>
 						</div>
 					</div>
-
 					<script type="text/javascript">
                             var ue = UE.getEditor('content',{
                                 autoHeightEnabled: true
@@ -1626,8 +1628,7 @@ body{margin:8px;font-family:sans-serif;font-size:16px;}p{margin:5px 0;}</style><
 							</script>
 				</div>
 			</div>
-			 -->
-			
+
 			<div class="layui-form-item">
 				<label class="layui-form-label">作者</label>
 				<div class=" layui-input-block ">
@@ -1639,7 +1640,9 @@ body{margin:8px;font-family:sans-serif;font-size:16px;}p{margin:5px 0;}</style><
 			<div class="layui-form-item">
 				<label class="layui-form-label">发布时间</label>
 				<div class=" layui-input-block ">
-					<input type="text" name="create_time" datetype="datetime"
+					<input type="text" 
+					    id="createTime"
+					    name="createTime" datetype="datetime"
 						required="" lay-vertype="msg" lay-verify="required" placeholder=""
 						autocomplete="off" class="layui-input sykDate" lay-key="1">
 
@@ -1674,5 +1677,6 @@ body{margin:8px;font-family:sans-serif;font-size:16px;}p{margin:5px 0;}</style><
 		</div>
 	</div>
 </body>
-	
-	</html>
+
+</html>
+
