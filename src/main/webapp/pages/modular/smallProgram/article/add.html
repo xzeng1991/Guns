@@ -1,0 +1,1678 @@
+<#include "/pages/head_lib.html">
+	<script type="text/javascript" charset="utf-8" src="${webroot}/static/plugins/ueditor/ueditor.config.js"></script>
+	<script type="text/javascript" charset="utf-8" src="${webroot}/static/plugins/ueditor/ueditor.all.min.js"> </script>
+	<script type="text/javascript" charset="utf-8" src="${webroot}/static/plugins/ueditor/lang/zh-cn/zh-cn.js"></script>
+	<body style="" class="  pace-done">
+	<div class="pace  pace-inactive">
+		<div class="pace-progress"
+			style="transform: translate3d(100%, 0px, 0px);"
+			data-progress-text="100%" data-progress="99">
+			<div class="pace-progress-inner"></div>
+		</div>
+		<div class="pace-activity"></div>
+	</div>
+	<div class="layui-fluid" style="">
+
+		<form class="layui-form" style="">
+			<input type="hidden" name="form_id" value="1"> <input
+				type="hidden" name="site_id" value="1"> <input type="hidden"
+				name="column_id" value="3">
+			<div class="layui-form-item">
+				<label class="layui-form-label">标题</label>
+				<div class=" layui-input-block ">
+					<input type="text" name="title_name" required="" lay-vertype="msg"
+						lay-verify="required" value="" placeholder="" autocomplete="off"
+						class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">缩略图</label>
+				<div class="layui-input-inline ">
+					<div class="layui-input-inline">
+						<input required="" lay-vertype="msg" type="text" id="filePath"
+							name="thumbnail" autocomplete="off" disabled="disabled"
+							class="layui-input">
+					</div>
+
+				</div>
+				<div class="layui-input-inline">
+					<button type="button" class="layui-btn" function="upload"
+						fileelem="#filePath" fileaccept="file" fileexts="" filesize="1024"
+						inputs="type:test">上传</button>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">来源</label>
+				<div class=" layui-input-block ">
+					<input type="text" name="source" required="" lay-vertype="msg"
+						value="本站" placeholder="本站" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">关键字</label>
+				<div class=" layui-input-block ">
+					<input type="text" name="keyword" required="" lay-vertype="msg"
+						lay-verify="required" value="" placeholder="" autocomplete="off"
+						class="layui-input">
+				</div>
+			</div>
+			
+			<div class="layui-form-item">
+				<label class="layui-form-label">内容</label>
+				<div class=" layui-input-block ">
+			                <script id="edit" name="content" type="text/plain" style="width:100%;height:200px;">
+                            </script>
+                            <script type="text/javascript">
+                            var ue = UE.getEditor('content',{autoHeightEnabled: true});
+							</script>
+				</div>
+			</div>
+							
+			
+			<!-- <div class="layui-form-item" style="">
+				<label class="layui-form-label">内容</label>
+				<div class=" layui-input-block " style="">
+					<div style="width: 100%;" id="content" class="edui-default">
+						<div id="edui1" class="edui-editor  edui-default"
+							style="width: 100%; z-index: 999;">
+							<div id="edui1_toolbarbox"
+								class="edui-editor-toolbarbox edui-default" style="">
+								<div id="edui1_toolbarboxouter"
+									class="edui-editor-toolbarboxouter edui-default">
+									<div class="edui-editor-toolbarboxinner edui-default">
+										<div id="edui2" class="edui-toolbar   edui-default"
+											onselectstart="return false;"
+											onmousedown="return $EDITORUI[&quot;edui2&quot;]._onMouseDown(event, this);"
+											style="-moz-user-select: none;">
+											<div id="edui3"
+												class="edui-box edui-button edui-for-fullscreen edui-default">
+												<div id="edui3_state"
+													onmousedown="$EDITORUI[&quot;edui3&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui3&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui3&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui3&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui3_body" unselectable="on" title="全屏"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui3&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui3&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+															<div class="edui-box edui-label edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui4"
+												class="edui-box edui-button edui-for-source edui-default">
+												<div id="edui4_state"
+													onmousedown="$EDITORUI[&quot;edui4&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui4&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui4&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui4&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui4_body" unselectable="on" title="源代码"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui4&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui4&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui5" class="edui-box edui-separator  edui-default"></div>
+											<div id="edui6"
+												class="edui-box edui-button edui-for-undo edui-default">
+												<div id="edui6_state"
+													onmousedown="$EDITORUI[&quot;edui6&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui6&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui6&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui6&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default edui-state-disabled">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui6_body" unselectable="on" title="撤销"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui6&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui6&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui7"
+												class="edui-box edui-button edui-for-redo edui-default">
+												<div id="edui7_state"
+													onmousedown="$EDITORUI[&quot;edui7&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui7&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui7&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui7&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default edui-state-disabled">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui7_body" unselectable="on" title="重做"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui7&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui7&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui8" class="edui-box edui-separator  edui-default"></div>
+											<div id="edui9"
+												class="edui-box edui-button edui-for-bold edui-default">
+												<div id="edui9_state"
+													onmousedown="$EDITORUI[&quot;edui9&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui9&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui9&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui9&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui9_body" unselectable="on" title="加粗"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui9&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui9&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui10"
+												class="edui-box edui-button edui-for-italic edui-default">
+												<div id="edui10_state"
+													onmousedown="$EDITORUI[&quot;edui10&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui10&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui10&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui10&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui10_body" unselectable="on" title="斜体"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui10&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui10&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui11"
+												class="edui-box edui-button edui-for-underline edui-default">
+												<div id="edui11_state"
+													onmousedown="$EDITORUI[&quot;edui11&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui11&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui11&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui11&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui11_body" unselectable="on" title="下划线"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui11&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui11&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui12"
+												class="edui-box edui-button edui-for-fontborder edui-default">
+												<div id="edui12_state"
+													onmousedown="$EDITORUI[&quot;edui12&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui12&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui12&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui12&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui12_body" unselectable="on" title="字符边框"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui12&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui12&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui13"
+												class="edui-box edui-button edui-for-strikethrough edui-default">
+												<div id="edui13_state"
+													onmousedown="$EDITORUI[&quot;edui13&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui13&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui13&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui13&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui13_body" unselectable="on" title="删除线"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui13&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui13&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui14"
+												class="edui-box edui-button edui-for-superscript edui-default">
+												<div id="edui14_state"
+													onmousedown="$EDITORUI[&quot;edui14&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui14&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui14&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui14&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui14_body" unselectable="on" title="上标"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui14&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui14&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui15"
+												class="edui-box edui-button edui-for-subscript edui-default">
+												<div id="edui15_state"
+													onmousedown="$EDITORUI[&quot;edui15&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui15&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui15&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui15&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui15_body" unselectable="on" title="下标"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui15&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui15&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui16"
+												class="edui-box edui-button edui-for-removeformat edui-default">
+												<div id="edui16_state"
+													onmousedown="$EDITORUI[&quot;edui16&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui16&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui16&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui16&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui16_body" unselectable="on" title="清除格式"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui16&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui16&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui17"
+												class="edui-box edui-button edui-for-formatmatch edui-default">
+												<div id="edui17_state"
+													onmousedown="$EDITORUI[&quot;edui17&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui17&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui17&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui17&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui17_body" unselectable="on" title="格式刷"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui17&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui17&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui18"
+												class="edui-box edui-splitbutton edui-for-autotypeset edui-default">
+												<div title="自动排版" id="edui18_state"
+													onmousedown="$EDITORUI[&quot;edui18&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui18&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui18&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui18&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-splitbutton-body edui-default">
+														<div id="edui18_button_body"
+															class="edui-box edui-button-body edui-default"
+															onclick="$EDITORUI[&quot;edui18&quot;]._onButtonClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+														<div class="edui-box edui-splitborder edui-default"></div>
+														<div class="edui-box edui-arrow edui-default"
+															onclick="$EDITORUI[&quot;edui18&quot;]._onArrowClick();"></div>
+													</div>
+												</div>
+											</div>
+											<div id="edui21"
+												class="edui-box edui-button edui-for-blockquote edui-default">
+												<div id="edui21_state"
+													onmousedown="$EDITORUI[&quot;edui21&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui21&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui21&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui21&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui21_body" unselectable="on" title="引用"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui21&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui21&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui22"
+												class="edui-box edui-button edui-for-pasteplain edui-default">
+												<div id="edui22_state"
+													onmousedown="$EDITORUI[&quot;edui22&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui22&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui22&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui22&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui22_body" unselectable="on" title="纯文本粘贴模式"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui22&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui22&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui23"
+												class="edui-box edui-separator  edui-default"></div>
+											<div id="edui24"
+												class="edui-box edui-splitbutton edui-for-forecolor edui-default edui-colorbutton">
+												<div title="字体颜色" id="edui24_state"
+													onmousedown="$EDITORUI[&quot;edui24&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui24&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui24&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui24&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-splitbutton-body edui-default">
+														<div id="edui24_button_body"
+															class="edui-box edui-button-body edui-default"
+															onclick="$EDITORUI[&quot;edui24&quot;]._onButtonClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+															<div id="edui24_colorlump" class="edui-colorlump"></div>
+														</div>
+														<div class="edui-box edui-splitborder edui-default"></div>
+														<div class="edui-box edui-arrow edui-default"
+															onclick="$EDITORUI[&quot;edui24&quot;]._onArrowClick();"></div>
+													</div>
+												</div>
+											</div>
+											<div id="edui27"
+												class="edui-box edui-splitbutton edui-for-backcolor edui-default edui-colorbutton">
+												<div title="背景色" id="edui27_state"
+													onmousedown="$EDITORUI[&quot;edui27&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui27&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui27&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui27&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-splitbutton-body edui-default">
+														<div id="edui27_button_body"
+															class="edui-box edui-button-body edui-default"
+															onclick="$EDITORUI[&quot;edui27&quot;]._onButtonClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+															<div id="edui27_colorlump" class="edui-colorlump"></div>
+														</div>
+														<div class="edui-box edui-splitborder edui-default"></div>
+														<div class="edui-box edui-arrow edui-default"
+															onclick="$EDITORUI[&quot;edui27&quot;]._onArrowClick();"></div>
+													</div>
+												</div>
+											</div>
+											<div id="edui30"
+												class="edui-box edui-menubutton edui-for-insertorderedlist edui-default">
+												<div title="有序列表" id="edui30_state"
+													onmousedown="$EDITORUI[&quot;edui30&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui30&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui30&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui30&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-menubutton-body edui-default">
+														<div id="edui30_button_body"
+															class="edui-box edui-button-body edui-default"
+															onclick="$EDITORUI[&quot;edui30&quot;]._onButtonClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+														<div class="edui-box edui-splitborder edui-default"></div>
+														<div class="edui-box edui-arrow edui-default"
+															onclick="$EDITORUI[&quot;edui30&quot;]._onArrowClick();"></div>
+													</div>
+												</div>
+											</div>
+											<div id="edui43"
+												class="edui-box edui-menubutton edui-for-insertunorderedlist edui-default">
+												<div title="无序列表" id="edui43_state"
+													onmousedown="$EDITORUI[&quot;edui43&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui43&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui43&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui43&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-menubutton-body edui-default">
+														<div id="edui43_button_body"
+															class="edui-box edui-button-body edui-default"
+															onclick="$EDITORUI[&quot;edui43&quot;]._onButtonClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+														<div class="edui-box edui-splitborder edui-default"></div>
+														<div class="edui-box edui-arrow edui-default"
+															onclick="$EDITORUI[&quot;edui43&quot;]._onArrowClick();"></div>
+													</div>
+												</div>
+											</div>
+											<div id="edui50"
+												class="edui-box edui-button edui-for-selectall edui-default">
+												<div id="edui50_state"
+													onmousedown="$EDITORUI[&quot;edui50&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui50&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui50&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui50&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui50_body" unselectable="on" title="全选"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui50&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui50&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui51"
+												class="edui-box edui-button edui-for-cleardoc edui-default">
+												<div id="edui51_state"
+													onmousedown="$EDITORUI[&quot;edui51&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui51&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui51&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui51&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui51_body" unselectable="on" title="清空文档"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui51&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui51&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+															<div class="edui-box edui-label edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui52"
+												class="edui-box edui-separator  edui-default"></div>
+											<div id="edui53"
+												class="edui-box edui-menubutton edui-for-rowspacingtop edui-default">
+												<div title="段前距" id="edui53_state"
+													onmousedown="$EDITORUI[&quot;edui53&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui53&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui53&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui53&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-menubutton-body edui-default">
+														<div id="edui53_button_body"
+															class="edui-box edui-button-body edui-default"
+															onclick="$EDITORUI[&quot;edui53&quot;]._onButtonClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+														<div class="edui-box edui-splitborder edui-default"></div>
+														<div class="edui-box edui-arrow edui-default"
+															onclick="$EDITORUI[&quot;edui53&quot;]._onArrowClick();"></div>
+													</div>
+												</div>
+											</div>
+											<div id="edui60"
+												class="edui-box edui-menubutton edui-for-rowspacingbottom edui-default">
+												<div title="段后距" id="edui60_state"
+													onmousedown="$EDITORUI[&quot;edui60&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui60&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui60&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui60&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-menubutton-body edui-default">
+														<div id="edui60_button_body"
+															class="edui-box edui-button-body edui-default"
+															onclick="$EDITORUI[&quot;edui60&quot;]._onButtonClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+														<div class="edui-box edui-splitborder edui-default"></div>
+														<div class="edui-box edui-arrow edui-default"
+															onclick="$EDITORUI[&quot;edui60&quot;]._onArrowClick();"></div>
+													</div>
+												</div>
+											</div>
+											<div id="edui67"
+												class="edui-box edui-menubutton edui-for-lineheight edui-default">
+												<div title="行间距" id="edui67_state"
+													onmousedown="$EDITORUI[&quot;edui67&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui67&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui67&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui67&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-menubutton-body edui-default">
+														<div id="edui67_button_body"
+															class="edui-box edui-button-body edui-default"
+															onclick="$EDITORUI[&quot;edui67&quot;]._onButtonClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+														<div class="edui-box edui-splitborder edui-default"></div>
+														<div class="edui-box edui-arrow edui-default"
+															onclick="$EDITORUI[&quot;edui67&quot;]._onArrowClick();"></div>
+													</div>
+												</div>
+											</div>
+											<div id="edui76"
+												class="edui-box edui-separator  edui-default"></div>
+											<div id="edui77"
+												class="edui-box edui-combox edui-for-customstyle edui-default">
+												<div title="自定义标题" id="edui77_state"
+													onmousedown="$EDITORUI[&quot;edui77&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui77&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui77&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui77&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-combox-body edui-default">
+														<div id="edui77_button_body"
+															class="edui-box edui-button-body edui-default"
+															onclick="$EDITORUI[&quot;edui77&quot;]._onButtonClick(event, this);">自定义标题</div>
+														<div class="edui-box edui-splitborder edui-default"></div>
+														<div class="edui-box edui-arrow edui-default"
+															onclick="$EDITORUI[&quot;edui77&quot;]._onArrowClick();"></div>
+													</div>
+												</div>
+											</div>
+											<div id="edui83"
+												class="edui-box edui-combox edui-for-paragraph edui-default">
+												<div title="段落格式" id="edui83_state"
+													onmousedown="$EDITORUI[&quot;edui83&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui83&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui83&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui83&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-combox-body edui-default">
+														<div id="edui83_button_body"
+															class="edui-box edui-button-body edui-default"
+															onclick="$EDITORUI[&quot;edui83&quot;]._onButtonClick(event, this);">段落</div>
+														<div class="edui-box edui-splitborder edui-default"></div>
+														<div class="edui-box edui-arrow edui-default"
+															onclick="$EDITORUI[&quot;edui83&quot;]._onArrowClick();"></div>
+													</div>
+												</div>
+											</div>
+											<div id="edui92"
+												class="edui-box edui-combox edui-for-fontfamily edui-default">
+												<div title="字体" id="edui92_state"
+													onmousedown="$EDITORUI[&quot;edui92&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui92&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui92&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui92&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-combox-body edui-default">
+														<div id="edui92_button_body"
+															class="edui-box edui-button-body edui-default"
+															onclick="$EDITORUI[&quot;edui92&quot;]._onButtonClick(event, this);">arial</div>
+														<div class="edui-box edui-splitborder edui-default"></div>
+														<div class="edui-box edui-arrow edui-default"
+															onclick="$EDITORUI[&quot;edui92&quot;]._onArrowClick();"></div>
+													</div>
+												</div>
+											</div>
+											<div id="edui105"
+												class="edui-box edui-combox edui-for-fontsize edui-default">
+												<div title="字号" id="edui105_state"
+													onmousedown="$EDITORUI[&quot;edui105&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui105&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui105&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui105&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-combox-body edui-default">
+														<div id="edui105_button_body"
+															class="edui-box edui-button-body edui-default"
+															onclick="$EDITORUI[&quot;edui105&quot;]._onButtonClick(event, this);">16px</div>
+														<div class="edui-box edui-splitborder edui-default"></div>
+														<div class="edui-box edui-arrow edui-default"
+															onclick="$EDITORUI[&quot;edui105&quot;]._onArrowClick();"></div>
+													</div>
+												</div>
+											</div>
+											<div id="edui116"
+												class="edui-box edui-separator  edui-default"></div>
+											<div id="edui117"
+												class="edui-box edui-button edui-for-directionalityltr edui-default">
+												<div id="edui117_state"
+													onmousedown="$EDITORUI[&quot;edui117&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui117&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui117&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui117&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default edui-state-checked">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui117_body" unselectable="on" title="从左向右输入"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui117&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui117&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+															<div class="edui-box edui-label edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui118"
+												class="edui-box edui-button edui-for-directionalityrtl edui-default">
+												<div id="edui118_state"
+													onmousedown="$EDITORUI[&quot;edui118&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui118&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui118&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui118&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui118_body" unselectable="on" title="从右向左输入"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui118&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui118&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+															<div class="edui-box edui-label edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui119"
+												class="edui-box edui-button edui-for-indent edui-default">
+												<div id="edui119_state"
+													onmousedown="$EDITORUI[&quot;edui119&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui119&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui119&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui119&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui119_body" unselectable="on" title="首行缩进"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui119&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui119&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui120"
+												class="edui-box edui-separator  edui-default"></div>
+											<div id="edui121"
+												class="edui-box edui-button edui-for-justifyleft edui-default">
+												<div id="edui121_state"
+													onmousedown="$EDITORUI[&quot;edui121&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui121&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui121&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui121&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default edui-state-checked">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui121_body" unselectable="on" title="居左对齐"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui121&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui121&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+															<div class="edui-box edui-label edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui122"
+												class="edui-box edui-button edui-for-justifycenter edui-default">
+												<div id="edui122_state"
+													onmousedown="$EDITORUI[&quot;edui122&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui122&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui122&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui122&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui122_body" unselectable="on" title="居中对齐"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui122&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui122&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+															<div class="edui-box edui-label edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui123"
+												class="edui-box edui-button edui-for-justifyright edui-default">
+												<div id="edui123_state"
+													onmousedown="$EDITORUI[&quot;edui123&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui123&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui123&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui123&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui123_body" unselectable="on" title="居右对齐"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui123&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui123&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+															<div class="edui-box edui-label edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui124"
+												class="edui-box edui-button edui-for-justifyjustify edui-default">
+												<div id="edui124_state"
+													onmousedown="$EDITORUI[&quot;edui124&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui124&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui124&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui124&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui124_body" unselectable="on" title="两端对齐"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui124&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui124&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+															<div class="edui-box edui-label edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui125"
+												class="edui-box edui-separator  edui-default"></div>
+											<div id="edui126"
+												class="edui-box edui-button edui-for-touppercase edui-default">
+												<div id="edui126_state"
+													onmousedown="$EDITORUI[&quot;edui126&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui126&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui126&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui126&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui126_body" unselectable="on" title="字母大写"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui126&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui126&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui127"
+												class="edui-box edui-button edui-for-tolowercase edui-default">
+												<div id="edui127_state"
+													onmousedown="$EDITORUI[&quot;edui127&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui127&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui127&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui127&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui127_body" unselectable="on" title="字母小写"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui127&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui127&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui128"
+												class="edui-box edui-separator  edui-default"></div>
+											<div id="edui135"
+												class="edui-box edui-button edui-for-link edui-default">
+												<div id="edui135_state"
+													onmousedown="$EDITORUI[&quot;edui135&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui135&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui135&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui135&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui135_body" unselectable="on" title="超链接"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui135&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui135&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+															<div class="edui-box edui-label edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui136"
+												class="edui-box edui-button edui-for-unlink edui-default">
+												<div id="edui136_state"
+													onmousedown="$EDITORUI[&quot;edui136&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui136&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui136&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui136&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default edui-state-disabled">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui136_body" unselectable="on" title="取消链接"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui136&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui136&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui141"
+												class="edui-box edui-button edui-for-anchor edui-default">
+												<div id="edui141_state"
+													onmousedown="$EDITORUI[&quot;edui141&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui141&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui141&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui141&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui141_body" unselectable="on" title="锚点"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui141&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui141&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+															<div class="edui-box edui-label edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui142"
+												class="edui-box edui-separator  edui-default"></div>
+											<div id="edui143"
+												class="edui-box edui-button edui-for-imagenone edui-default">
+												<div id="edui143_state"
+													onmousedown="$EDITORUI[&quot;edui143&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui143&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui143&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui143&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default edui-state-disabled">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui143_body" unselectable="on" title="默认"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui143&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui143&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+															<div class="edui-box edui-label edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui144"
+												class="edui-box edui-button edui-for-imageleft edui-default">
+												<div id="edui144_state"
+													onmousedown="$EDITORUI[&quot;edui144&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui144&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui144&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui144&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default edui-state-disabled">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui144_body" unselectable="on" title="左浮动"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui144&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui144&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+															<div class="edui-box edui-label edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui145"
+												class="edui-box edui-button edui-for-imageright edui-default">
+												<div id="edui145_state"
+													onmousedown="$EDITORUI[&quot;edui145&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui145&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui145&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui145&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default edui-state-disabled">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui145_body" unselectable="on" title="右浮动"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui145&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui145&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+															<div class="edui-box edui-label edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui146"
+												class="edui-box edui-button edui-for-imagecenter edui-default">
+												<div id="edui146_state"
+													onmousedown="$EDITORUI[&quot;edui146&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui146&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui146&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui146&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default edui-state-disabled">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui146_body" unselectable="on" title="居中"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui146&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui146&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+															<div class="edui-box edui-label edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui147"
+												class="edui-box edui-separator  edui-default"></div>
+											<div id="edui148"
+												class="edui-box edui-button edui-for-simpleupload edui-default">
+												<div id="edui148_state"
+													onmousedown="$EDITORUI[&quot;edui148&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui148&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui148&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui148&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui148_body" unselectable="on" title="单图上传"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui148&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui148&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default">
+																<iframe
+																	style="display: block; width: 20px; height: 20px; overflow: hidden; border: 0px none; margin: 0px; padding: 0px; position: absolute; top: 0px; left: 0px; opacity: 0; cursor: pointer;"></iframe>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui153"
+												class="edui-box edui-button edui-for-insertimage edui-default">
+												<div id="edui153_state"
+													onmousedown="$EDITORUI[&quot;edui153&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui153&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui153&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui153&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui153_body" unselectable="on" title="多图上传"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui153&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui153&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+															<div class="edui-box edui-label edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui154"
+												class="edui-box edui-splitbutton edui-for-emotion edui-default">
+												<div title="表情" id="edui154_state"
+													onmousedown="$EDITORUI[&quot;edui154&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui154&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui154&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui154&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-splitbutton-body edui-default">
+														<div id="edui154_button_body"
+															class="edui-box edui-button-body edui-default"
+															onclick="$EDITORUI[&quot;edui154&quot;]._onButtonClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+														<div class="edui-box edui-splitborder edui-default"></div>
+														<div class="edui-box edui-arrow edui-default"
+															onclick="$EDITORUI[&quot;edui154&quot;]._onArrowClick();"></div>
+													</div>
+												</div>
+											</div>
+											<div id="edui160"
+												class="edui-box edui-button edui-for-insertvideo edui-default">
+												<div id="edui160_state"
+													onmousedown="$EDITORUI[&quot;edui160&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui160&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui160&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui160&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui160_body" unselectable="on" title="视频"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui160&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui160&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+															<div class="edui-box edui-label edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui165"
+												class="edui-box edui-button edui-for-attachment edui-default">
+												<div id="edui165_state"
+													onmousedown="$EDITORUI[&quot;edui165&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui165&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui165&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui165&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui165_body" unselectable="on" title="附件"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui165&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui165&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+															<div class="edui-box edui-label edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui170"
+												class="edui-box edui-button edui-for-map edui-default">
+												<div id="edui170_state"
+													onmousedown="$EDITORUI[&quot;edui170&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui170&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui170&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui170&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui170_body" unselectable="on" title="Baidu地图"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui170&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui170&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+															<div class="edui-box edui-label edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui175"
+												class="edui-box edui-button edui-for-insertframe edui-default">
+												<div id="edui175_state"
+													onmousedown="$EDITORUI[&quot;edui175&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui175&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui175&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui175&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui175_body" unselectable="on" title="插入Iframe"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui175&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui175&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+															<div class="edui-box edui-label edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui176"
+												class="edui-box edui-combox edui-for-insertcode edui-default">
+												<div title="代码语言" id="edui176_state"
+													onmousedown="$EDITORUI[&quot;edui176&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui176&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui176&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui176&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-combox-body edui-default">
+														<div id="edui176_button_body"
+															class="edui-box edui-button-body edui-default"
+															onclick="$EDITORUI[&quot;edui176&quot;]._onButtonClick(event, this);">代码语言</div>
+														<div class="edui-box edui-splitborder edui-default"></div>
+														<div class="edui-box edui-arrow edui-default"
+															onclick="$EDITORUI[&quot;edui176&quot;]._onArrowClick();"></div>
+													</div>
+												</div>
+											</div>
+											<div id="edui202"
+												class="edui-box edui-button edui-for-pagebreak edui-default">
+												<div id="edui202_state"
+													onmousedown="$EDITORUI[&quot;edui202&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui202&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui202&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui202&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui202_body" unselectable="on" title="分页"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui202&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui202&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui207"
+												class="edui-box edui-button edui-for-template edui-default">
+												<div id="edui207_state"
+													onmousedown="$EDITORUI[&quot;edui207&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui207&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui207&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui207&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui207_body" unselectable="on" title="模板"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui207&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui207&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+															<div class="edui-box edui-label edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui212"
+												class="edui-box edui-button edui-for-background edui-default">
+												<div id="edui212_state"
+													onmousedown="$EDITORUI[&quot;edui212&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui212&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui212&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui212&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui212_body" unselectable="on" title="背景"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui212&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui212&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+															<div class="edui-box edui-label edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui213"
+												class="edui-box edui-separator  edui-default"></div>
+											<div id="edui214"
+												class="edui-box edui-button edui-for-horizontal edui-default">
+												<div id="edui214_state"
+													onmousedown="$EDITORUI[&quot;edui214&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui214&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui214&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui214&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui214_body" unselectable="on" title="分隔线"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui214&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui214&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui215"
+												class="edui-box edui-button edui-for-date edui-default">
+												<div id="edui215_state"
+													onmousedown="$EDITORUI[&quot;edui215&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui215&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui215&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui215&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui215_body" unselectable="on" title="日期"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui215&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui215&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui216"
+												class="edui-box edui-button edui-for-time edui-default">
+												<div id="edui216_state"
+													onmousedown="$EDITORUI[&quot;edui216&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui216&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui216&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui216&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui216_body" unselectable="on" title="时间"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui216&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui216&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui219"
+												class="edui-box edui-button edui-for-spechars edui-default">
+												<div id="edui219_state"
+													onmousedown="$EDITORUI[&quot;edui219&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui219&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui219&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui219&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui219_body" unselectable="on" title="特殊字符"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui219&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui219&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+															<div class="edui-box edui-label edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui224"
+												class="edui-box edui-button edui-for-wordimage edui-default">
+												<div id="edui224_state"
+													onmousedown="$EDITORUI[&quot;edui224&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui224&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui224&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui224&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default edui-state-disabled">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui224_body" unselectable="on" title="图片转存"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui224&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui224&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+															<div class="edui-box edui-label edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui225"
+												class="edui-box edui-separator  edui-default"></div>
+											<div id="edui226"
+												class="edui-box edui-splitbutton edui-for-inserttable edui-default">
+												<div title="插入表格" id="edui226_state"
+													onmousedown="$EDITORUI[&quot;edui226&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui226&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui226&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui226&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-splitbutton-body edui-default">
+														<div id="edui226_button_body"
+															class="edui-box edui-button-body edui-default"
+															onclick="$EDITORUI[&quot;edui226&quot;]._onButtonClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+														<div class="edui-box edui-splitborder edui-default"></div>
+														<div class="edui-box edui-arrow edui-default"
+															onclick="$EDITORUI[&quot;edui226&quot;]._onArrowClick();"></div>
+													</div>
+												</div>
+											</div>
+											<div id="edui229"
+												class="edui-box edui-button edui-for-deletetable edui-default">
+												<div id="edui229_state"
+													onmousedown="$EDITORUI[&quot;edui229&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui229&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui229&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui229&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default edui-state-disabled">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui229_body" unselectable="on" title="删除表格"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui229&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui229&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui230"
+												class="edui-box edui-button edui-for-insertparagraphbeforetable edui-default">
+												<div id="edui230_state"
+													onmousedown="$EDITORUI[&quot;edui230&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui230&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui230&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui230&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default edui-state-disabled">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui230_body" unselectable="on" title="表格前插入行"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui230&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui230&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui231"
+												class="edui-box edui-button edui-for-insertrow edui-default">
+												<div id="edui231_state"
+													onmousedown="$EDITORUI[&quot;edui231&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui231&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui231&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui231&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default edui-state-disabled">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui231_body" unselectable="on" title="前插入行"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui231&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui231&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui232"
+												class="edui-box edui-button edui-for-deleterow edui-default">
+												<div id="edui232_state"
+													onmousedown="$EDITORUI[&quot;edui232&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui232&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui232&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui232&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default edui-state-disabled">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui232_body" unselectable="on" title="删除行"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui232&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui232&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui233"
+												class="edui-box edui-button edui-for-insertcol edui-default">
+												<div id="edui233_state"
+													onmousedown="$EDITORUI[&quot;edui233&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui233&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui233&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui233&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default edui-state-disabled">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui233_body" unselectable="on" title="前插入列"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui233&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui233&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui234"
+												class="edui-box edui-button edui-for-deletecol edui-default">
+												<div id="edui234_state"
+													onmousedown="$EDITORUI[&quot;edui234&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui234&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui234&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui234&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default edui-state-disabled">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui234_body" unselectable="on" title="删除列"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui234&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui234&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui235"
+												class="edui-box edui-button edui-for-mergecells edui-default">
+												<div id="edui235_state"
+													onmousedown="$EDITORUI[&quot;edui235&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui235&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui235&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui235&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default edui-state-disabled">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui235_body" unselectable="on" title="合并多个单元格"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui235&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui235&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui236"
+												class="edui-box edui-button edui-for-mergeright edui-default">
+												<div id="edui236_state"
+													onmousedown="$EDITORUI[&quot;edui236&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui236&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui236&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui236&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default edui-state-disabled">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui236_body" unselectable="on" title="右合并单元格"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui236&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui236&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui237"
+												class="edui-box edui-button edui-for-mergedown edui-default">
+												<div id="edui237_state"
+													onmousedown="$EDITORUI[&quot;edui237&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui237&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui237&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui237&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default edui-state-disabled">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui237_body" unselectable="on" title="下合并单元格"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui237&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui237&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui238"
+												class="edui-box edui-button edui-for-splittocells edui-default">
+												<div id="edui238_state"
+													onmousedown="$EDITORUI[&quot;edui238&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui238&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui238&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui238&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default edui-state-disabled">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui238_body" unselectable="on" title="完全拆分单元格"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui238&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui238&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui239"
+												class="edui-box edui-button edui-for-splittorows edui-default">
+												<div id="edui239_state"
+													onmousedown="$EDITORUI[&quot;edui239&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui239&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui239&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui239&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default edui-state-disabled">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui239_body" unselectable="on" title="拆分成行"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui239&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui239&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui240"
+												class="edui-box edui-button edui-for-splittocols edui-default">
+												<div id="edui240_state"
+													onmousedown="$EDITORUI[&quot;edui240&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui240&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui240&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui240&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default edui-state-disabled">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui240_body" unselectable="on" title="拆分成列"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui240&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui240&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui245"
+												class="edui-box edui-button edui-for-charts edui-default">
+												<div id="edui245_state"
+													onmousedown="$EDITORUI[&quot;edui245&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui245&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui245&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui245&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default edui-state-disabled">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui245_body" unselectable="on" title="图表"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui245&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui245&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+															<div class="edui-box edui-label edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui246"
+												class="edui-box edui-separator  edui-default"></div>
+											<div id="edui247"
+												class="edui-box edui-button edui-for-print edui-default">
+												<div id="edui247_state"
+													onmousedown="$EDITORUI[&quot;edui247&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui247&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui247&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui247&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui247_body" unselectable="on" title="打印"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui247&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui247&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui250"
+												class="edui-box edui-button edui-for-searchreplace edui-default">
+												<div id="edui250_state"
+													onmousedown="$EDITORUI[&quot;edui250&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui250&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui250&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui250&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui250_body" unselectable="on" title="查询替换"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui250&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui250&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+															<div class="edui-box edui-label edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="edui251"
+												class="edui-box edui-button edui-for-drafts edui-default">
+												<div id="edui251_state"
+													onmousedown="$EDITORUI[&quot;edui251&quot;].Stateful_onMouseDown(event, this);"
+													onmouseup="$EDITORUI[&quot;edui251&quot;].Stateful_onMouseUp(event, this);"
+													onmouseover="$EDITORUI[&quot;edui251&quot;].Stateful_onMouseOver(event, this);"
+													onmouseout="$EDITORUI[&quot;edui251&quot;].Stateful_onMouseOut(event, this);"
+													class="edui-default edui-state-disabled">
+													<div class="edui-button-wrap edui-default">
+														<div id="edui251_body" unselectable="on" title="从草稿箱加载"
+															class="edui-button-body edui-default"
+															onmousedown="return $EDITORUI[&quot;edui251&quot;]._onMouseDown(event, this);"
+															onclick="return $EDITORUI[&quot;edui251&quot;]._onClick(event, this);">
+															<div class="edui-box edui-icon edui-default"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div id="edui1_toolbarmsg"
+									class="edui-editor-toolbarmsg edui-default"
+									style="display: none;">
+									<div id="edui1_upload_dialog"
+										class="edui-editor-toolbarmsg-upload edui-default"
+										onclick="$EDITORUI[&quot;edui1&quot;].showWordImageDialog();">点击上传</div>
+									<div class="edui-editor-toolbarmsg-close edui-default"
+										onclick="$EDITORUI[&quot;edui1&quot;].hideToolbarMsg();">x</div>
+									<div id="edui1_toolbarmsg_label"
+										class="edui-editor-toolbarmsg-label edui-default"></div>
+									<div style="height: 0; overflow: hidden; clear: both;"
+										class="edui-default"></div>
+								</div>
+								<div id="edui1_message_holder"
+									class="edui-editor-messageholder edui-default"
+									style="top: 58px; z-index: 1000;"></div>
+							</div>
+							<div id="edui1_iframeholder"
+								class="edui-editor-iframeholder edui-default"
+								style="width: 100%; height: 200px; z-index: 999; overflow: hidden;">
+								<iframe id="ueditor_0"
+									src="javascript:void(function(){document.open();document.write(&quot;<!DOCTYPE html><html xmlns='http://www.w3.org/1999/xhtml' class='view' ><head><style type='text/css'>.view{padding:0;word-wrap:break-word;cursor:text;height:90%;}
+body{margin:8px;font-family:sans-serif;font-size:16px;}p{margin:5px 0;}</style><link rel='stylesheet' type='text/css' href='http://localhost:8080/ofcms-admin/static/plugins/ueditor/themes/iframe.css'/></head><body class='view' ></body><script type='text/javascript'  id='_initialScript'>setTimeout(function(){editor = window.parent.UE.instants['ueditorInstant0'];editor._setup(document);},0);var _tmpScript = document.getElementById('_initialScript');_tmpScript.parentNode.removeChild(_tmpScript);</script></html>&quot;);document.close();}())"
+									width="100%" height="100%" frameborder="0"></iframe>
+							</div>
+							<div id="edui1_bottombar"
+								class="edui-editor-bottomContainer edui-default">
+								<table class="edui-default">
+									<tbody class="edui-default">
+										<tr class="edui-default">
+											<td id="edui1_elementpath"
+												class="edui-editor-bottombar edui-default"><div
+													class="edui-editor-breadcrumb" onmousedown="return false;">
+													元素路径: <span unselectable="on"
+														onclick="$EDITORUI[&quot;edui1&quot;].editor.execCommand(&quot;elementpath&quot;, &quot;0&quot;);">body</span>
+													&gt; <span unselectable="on"
+														onclick="$EDITORUI[&quot;edui1&quot;].editor.execCommand(&quot;elementpath&quot;, &quot;1&quot;);">p</span>
+												</div></td>
+											<td id="edui1_wordcount"
+												class="edui-editor-wordcount edui-default">当前已输入0个字符,
+												您还可以输入10000个字符。</td>
+											<td id="edui1_scale" class="edui-editor-scale edui-default"
+												style="display: none;"><div
+													class="edui-editor-icon edui-default"></div></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div id="edui1_scalelayer" class="edui-default"></div>
+						</div>
+					</div>
+
+					<script type="text/javascript">
+                            var ue = UE.getEditor('content',{
+                                autoHeightEnabled: true
+                            });
+							</script>
+				</div>
+			</div>
+			 -->
+			
+			<div class="layui-form-item">
+				<label class="layui-form-label">作者</label>
+				<div class=" layui-input-block ">
+					<input type="text" name="author" required="" lay-vertype="msg"
+						lay-verify="required" value="" placeholder="" autocomplete="off"
+						class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">发布时间</label>
+				<div class=" layui-input-block ">
+					<input type="text" name="create_time" datetype="datetime"
+						required="" lay-vertype="msg" lay-verify="required" placeholder=""
+						autocomplete="off" class="layui-input sykDate" lay-key="1">
+
+				</div>
+			</div>
+			<hr>
+			<div class="layui-form-item" style="text-align: center;">
+				<button class="layui-btn" lay-submit="" lay-filter="save"
+					url="cms/content/save.json">新增</button>
+				<button type="button" class="layui-btn layui-btn-primary"
+					function="close">关闭</button>
+			</div>
+			<textarea name="content" id="ueditor_textarea_content"
+				style="display: none;"></textarea>
+		</form>
+	</div>
+
+	<div id="edui_fixedlayer"
+		style="position: fixed; left: 0px; top: 0px; width: 0px; height: 0px;"
+		class="edui-default">
+		<div id="edui252" class="edui-popup  edui-bubble edui-default"
+			onmousedown="return false;" style="display: none;">
+			<div id="edui252_body" class="edui-popup-body edui-default">
+				<iframe
+					style="position: absolute; z-index: -1; left: 0; top: 0; background-color: transparent;"
+					src="about:blank" class="edui-default" width="100%" height="100%"
+					frameborder="0"></iframe>
+				<div class="edui-shadow edui-default"></div>
+				<div id="edui252_content" class="edui-popup-content edui-default">
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+	
+	</html>
