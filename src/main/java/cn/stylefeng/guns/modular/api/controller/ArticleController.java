@@ -16,39 +16,38 @@
 package cn.stylefeng.guns.modular.api.controller;
 
 import cn.hutool.core.bean.BeanUtil;
-import cn.stylefeng.guns.core.common.annotion.BussinessLog;
+import cn.stylefeng.guns.config.properties.GunsProperties;
 import cn.stylefeng.guns.core.common.annotion.Permission;
 import cn.stylefeng.guns.core.common.constant.Const;
-import cn.stylefeng.guns.core.common.constant.dictmap.DeleteDict;
-import cn.stylefeng.guns.core.common.constant.dictmap.RoleDict;
-import cn.stylefeng.guns.core.common.constant.factory.ConstantFactory;
 import cn.stylefeng.guns.core.common.exception.BizExceptionEnum;
-import cn.stylefeng.guns.core.common.node.ZTreeNode;
 import cn.stylefeng.guns.core.common.page.LayuiPageFactory;
 import cn.stylefeng.guns.core.log.LogObjectHolder;
+import cn.stylefeng.guns.core.util.DateUtil;
 import cn.stylefeng.guns.modular.api.service.ArticleService;
 import cn.stylefeng.guns.modular.api.warpper.ArticleWrapper;
-import cn.stylefeng.guns.modular.system.entity.Role;
-import cn.stylefeng.guns.modular.system.entity.User;
-import cn.stylefeng.guns.modular.system.model.RoleDto;
-import cn.stylefeng.guns.modular.system.service.RoleService;
-import cn.stylefeng.guns.modular.system.service.UserService;
-import cn.stylefeng.guns.modular.system.warpper.RoleWrapper;
+import cn.stylefeng.guns.modular.system.entity.Article;
+import cn.stylefeng.guns.modular.system.entity.ArticleExtension;
 import cn.stylefeng.roses.core.base.controller.BaseController;
 import cn.stylefeng.roses.core.reqres.response.ResponseData;
 import cn.stylefeng.roses.core.util.ToolUtil;
+import cn.stylefeng.roses.kernel.model.exception.RequestEmptyException;
 import cn.stylefeng.roses.kernel.model.exception.ServiceException;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
+import java.beans.Beans;
+import java.io.File;
+import java.util.Date;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * 文章管理制器
@@ -61,13 +60,11 @@ import java.util.Map;
 public class ArticleController extends BaseController {
 
     private static String PREFIX = "/modular/smallProgram/article/";
-
-    @Autowired
-    private UserService userService;
+    
+    private static String FILE_SAVE_PATH="D:/img/";
 
     @Autowired
     private ArticleService articleService;
-
     /**
      * 跳转到文章列表页面
      *
@@ -92,14 +89,16 @@ public class ArticleController extends BaseController {
     }
 
     /**
-     * 跳转到修改角色
+     * 跳转到修改文章
      *
-     * @author fengshuonan
-     * @Date 2018/12/23 6:31 PM
      */
-    @Permission
     @RequestMapping(value = "/article_edit")
-    public String roleEdit(@RequestParam Long roleId) {
+    public String roleEdit(@RequestParam Long id) {
+    	if (ToolUtil.isEmpty(id)) {
+    		throw new ServiceException(BizExceptionEnum.REQUEST_NULL);
+    	}
+    	Article data = articleService.getById(id);
+    	LogObjectHolder.me().set(data);
         return PREFIX + "/article_edit.html";
     }
 
@@ -120,6 +119,72 @@ public class ArticleController extends BaseController {
         return LayuiPageFactory.createPageInfo(wrap);
     }
 
+    @RequestMapping("/getArticleInfo")
+    @ResponseBody
+    public Object getArticleInfo(@RequestParam Long id) {
+        if (ToolUtil.isEmpty(id)) {
+            throw new RequestEmptyException();
+        }
+        Article data = articleService.getById(id);
+        ArticleExtension extension=new ArticleExtension();
+        BeanUtil.copyProperties(data, extension);
+        String strDate=DateUtil.dateToString(data.getCreateTime());
+        extension.setCreateTimeStr(strDate);
+        return ResponseData.success(extension);
+    }
+    /**
+     * 上传图片
+     */
+    @RequestMapping(method = RequestMethod.POST, path = "/upload")
+    @ResponseBody
+    public ResponseData upload(@RequestPart("file") MultipartFile picture) {
+        String pictureName = UUID.randomUUID().toString() + "." + ToolUtil.getFileSuffix(picture.getOriginalFilename());
+        try {
+        	String path=FILE_SAVE_PATH;
+            picture.transferTo(new File(path + pictureName));
+        } catch (Exception e) {
+            throw new ServiceException(BizExceptionEnum.UPLOAD_ERROR);
+        }
+        SUCCESS_TIP.setData(pictureName);
+        return SUCCESS_TIP;
+    }
+    
+    /**
+     * 角色新增
+     *
+     * @author fengshuonan
+     * @Date 2018/12/23 6:31 PM
+     */
+    @RequestMapping(value = "/add")
+    @Permission(Const.ADMIN_NAME)
+    @ResponseBody
+    public ResponseData addArticle(Article article) {
+    	article.setCreateTime(new Date());
+    	articleService.addArticle(article);
+        return SUCCESS_TIP;
+    }
 
+    /**
+     * 文章修改
+     *
+     */
+    @RequestMapping(value = "/edit")
+    @ResponseBody
+    public ResponseData edit(Article article) {
+    	articleService.editArticle(article);
+        return SUCCESS_TIP;
+    }
+
+    /**
+     * 删除
+     */
+    @RequestMapping(value = "/remove")
+    @ResponseBody
+    public ResponseData remove(@RequestParam Long id) {
+    	articleService.delArticleById(id);
+        return SUCCESS_TIP;
+    }
+
+    
 
 }

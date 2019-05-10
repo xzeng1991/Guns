@@ -1,8 +1,9 @@
 @layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/smallProgram/article/article_add.js"]}){
 
 
-<form id="userForm" lay-filter="roleForm" class="layui-form model-form">
-    <input name="roleId" type="hidden"/>
+<form id="articleAddForm" lay-filter="articleAddForm" class="layui-form model-form">
+    <input name="id" type="hidden"/>
+    <input name="avatar" type="hidden"/>
     <div class="layui-form-item">
         <label class="layui-form-label">文章标题<span style="color: red;">*</span></label>
         <div class="layui-input-block">
@@ -24,18 +25,19 @@
     </div>
     
     <div class="layui-form-item">
-        <label class="layui-form-label">头像<span style="color: red;">*</span></label>
-        <div class="layui-input-block">
-            <input id="avatar" name="avatar" placeholder="请输入头像" type="text" class="layui-input" lay-verify="required" required autocomplete="off"/>
+        <label class="layui-form-label">头像<span style="color: red;"></span></label>
+        <div class="layui-upload">
+          <button type="button" class="layui-btn layui-btn-normal" id="avatarFile">选择文件</button>
+          <button type="button" class="layui-btn" id="uploadAvatar">开始上传</button>
         </div>
     </div>
     
-    <div class="layui-form-item">
+    <!-- <div class="layui-form-item">
         <label class="layui-form-label">创建时间<span style="color: red;">*</span></label>
         <div class="layui-input-block">
             <input id="createTime" name="createTime" type="text" class="layui-input" lay-verify="required" required autocomplete="off"/>
         </div>
-    </div>
+    </div> -->
     
     <div class="layui-form-item">
         <label class="layui-form-label">内容</label>

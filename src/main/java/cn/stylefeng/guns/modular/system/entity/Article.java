@@ -1,5 +1,6 @@
 package cn.stylefeng.guns.modular.system.entity;
 
+import java.beans.Transient;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -51,4 +52,5 @@ public class Article implements Serializable {
 	
 	@TableField(value = "create_time", fill = FieldFill.INSERT)
 	private Date createTime;	// 创建时间
+	
 }

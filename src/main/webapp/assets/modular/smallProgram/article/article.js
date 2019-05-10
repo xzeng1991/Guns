@@ -22,6 +22,7 @@ layui.use(['layer', 'form', 'table', 'admin', 'ax'], function () {
     Article.initColumn = function () {
         return [[
             {type: 'checkbox'},
+            {field: 'id', hide: true, sort: true},
             {field: 'title', sort: true, title: '文章标题'},
             {field: 'brife', sort: true, title: '文章简介'},
             {field: 'author', sort: true, title: '作者'},
@@ -45,7 +46,7 @@ layui.use(['layer', 'form', 'table', 'admin', 'ax'], function () {
     /**
      * 弹出添加文章页面
      */
-    Article.openAddRole = function () {
+    Article.openAddArticle = function () {
         admin.putTempData('formOk', false);
         top.layui.admin.open({
             type: 2,
@@ -65,12 +66,13 @@ layui.use(['layer', 'form', 'table', 'admin', 'ax'], function () {
      *
      * @param data 点击按钮时候的行数据
      */
-    Article.onEditRole = function (data) {
+    Article.onEditArticle = function (data) {
         admin.putTempData('formOk', false);
         top.layui.admin.open({
             type: 2,
-            title: '修改角色',
-            content: Feng.ctxPath + '/role/role_edit?roleId=' + data.roleId,
+            area: ['990px', '960px'],
+            title: '修改文章',
+            content: Feng.ctxPath + '/article/article_edit?id=' + data.id,
             end: function () {
                 admin.getTempData('formOk') && table.reload(Role.tableId);
             }
@@ -82,18 +84,18 @@ layui.use(['layer', 'form', 'table', 'admin', 'ax'], function () {
      *
      * @param data 点击按钮时候的行数据
      */
-    Article.onDeleteRole = function (data) {
+    Article.onDeleteArticle = function (data) {
         var operation = function () {
-            var ajax = new $ax(Feng.ctxPath + "/role/remove", function () {
+            var ajax = new $ax(Feng.ctxPath + "/article/remove", function () {
                 Feng.success("删除成功!");
-                table.reload(Role.tableId);
+                table.reload(Article.tableId);
             }, function (data) {
                 Feng.error("删除失败!" + data.responseJSON.message + "!");
             });
-            ajax.set("roleId", data.roleId);
+            ajax.set("id", data.id);
             ajax.start();
         };
-        Feng.confirm("是否删除角色 " + data.name + "?", operation);
+        Feng.confirm("是否删除文章 " + data.title + "?", operation);
     };
 
 
@@ -115,7 +117,7 @@ layui.use(['layer', 'form', 'table', 'admin', 'ax'], function () {
 
     // 添加按钮点击事件
     $('#btnAdd').click(function () {
-        Article.openAddRole();
+        Article.openAddArticle();
     });
 
 
@@ -124,13 +126,10 @@ layui.use(['layer', 'form', 'table', 'admin', 'ax'], function () {
     table.on('tool(' + Article.tableId + ')', function (obj) {
         var data = obj.data;
         var layEvent = obj.event;
-
         if (layEvent === 'edit') {
-            Article.onEditRole(data);
+            Article.onEditArticle(data);
         } else if (layEvent === 'delete') {
-            Article.onDeleteRole(data);
-        } else if (layEvent === 'roleAssign') {
-            Article.roleAssign(data);
-        }
+            Article.onDeleteArticle(data);
+        } 
     });
 });
